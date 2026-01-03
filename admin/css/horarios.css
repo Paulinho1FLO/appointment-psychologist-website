@@ -1,0 +1,255 @@
+/* ==========================================
+   HORÁRIOS - ESTILOS SIMPLIFICADOS
+   ========================================== */
+
+/* ===== WEEKDAY SELECTOR ===== */
+.weekday-selector {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.weekday-btn {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background-color: var(--background);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  min-width: 100px;
+  text-align: center;
+}
+
+.weekday-btn:hover {
+  border-color: var(--primary);
+  background-color: var(--surface);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.weekday-btn.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-lg);
+}
+
+.weekday-btn .weekday-name {
+  display: block;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-xs);
+}
+
+.weekday-btn .weekday-count {
+  display: block;
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+}
+
+/* ===== SCHEDULE SECTION ===== */
+.schedule-section {
+  background-color: var(--surface);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--border);
+}
+
+.schedule-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.schedule-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* ===== TIME SLOTS LIST ===== */
+.time-slots-list {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.time-slot-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  background-color: var(--background);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  transition: all var(--transition-base);
+}
+
+.time-slot-item:hover {
+  border-color: var(--primary);
+  background-color: var(--surface);
+}
+
+.time-slot-time {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.time-slot-duration {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-left: var(--spacing-md);
+}
+
+.time-slot-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* ===== ADD TIME FORM ===== */
+.add-time-form {
+  background-color: var(--info-bg);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--primary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.add-time-form-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.add-time-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: var(--spacing-md);
+  align-items: end;
+}
+
+/* ===== COPY FROM DAY ===== */
+.copy-from-section {
+  background-color: var(--background);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--border);
+}
+
+.copy-from-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.copy-from-fields {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--spacing-md);
+  align-items: end;
+}
+
+/* ===== EMPTY STATE ===== */
+.schedule-empty {
+  text-align: center;
+  padding: var(--spacing-3xl);
+  color: var(--text-secondary);
+}
+
+.schedule-empty-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-md);
+}
+
+.schedule-empty-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.schedule-empty-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* ===== BLOCK DATES SECTION ===== */
+.block-dates-section {
+  background-color: var(--surface);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-top: var(--spacing-2xl);
+}
+
+.blocked-dates-list {
+  margin-top: var(--spacing-xl);
+}
+
+.blocked-date-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  background-color: var(--error-bg);
+  border-left: 4px solid var(--error);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.blocked-date-info {
+  flex: 1;
+}
+
+.blocked-date-date {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.blocked-date-reason {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .weekday-selector {
+    gap: var(--spacing-sm);
+  }
+  
+  .weekday-btn {
+    min-width: 80px;
+    padding: var(--spacing-md);
+  }
+  
+  .add-time-fields {
+    grid-template-columns: 1fr;
+  }
+  
+  .copy-from-fields {
+    grid-template-columns: 1fr;
+  }
+  
+  .time-slot-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+}

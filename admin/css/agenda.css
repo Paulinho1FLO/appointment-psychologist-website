@@ -1,0 +1,400 @@
+/* ==========================================
+   AGENDA - ESTILOS
+   ========================================== */
+
+/* ===== FILTERS BAR ===== */
+.agenda-filters {
+  background-color: var(--surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.filters-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: var(--spacing-md);
+  align-items: end;
+}
+
+/* ===== APPOINTMENTS TABLE ===== */
+.appointments-table-wrapper {
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.table-header {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background-color: var(--background);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.table-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-left: var(--spacing-sm);
+}
+
+/* ===== APPOINTMENT ROW ACTIONS ===== */
+.appointment-row {
+  position: relative;
+}
+
+.appointment-row:hover .row-actions {
+  opacity: 1;
+}
+
+.row-actions {
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+/* ===== APPOINTMENT DETAIL SIDEBAR ===== */
+.appointment-detail-sidebar {
+  position: fixed;
+  top: 0;
+  right: -500px;
+  width: 500px;
+  height: 100vh;
+  background-color: var(--surface);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-modal);
+  transition: right var(--transition-base);
+  overflow-y: auto;
+}
+
+.appointment-detail-sidebar.open {
+  right: 0;
+}
+
+.detail-sidebar-header {
+  padding: var(--spacing-xl);
+  background-color: var(--background);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.detail-sidebar-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.detail-sidebar-close {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  border: none;
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.detail-sidebar-close:hover {
+  background-color: var(--error-bg);
+  color: var(--error);
+}
+
+.detail-sidebar-content {
+  padding: var(--spacing-xl);
+}
+
+.detail-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.detail-section-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-md);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.detail-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.detail-value.large {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.detail-notes-box {
+  background-color: var(--background);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary);
+}
+
+.detail-notes-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  white-space: pre-wrap;
+}
+
+.detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 2px solid var(--border);
+}
+
+/* ===== STATUS CHANGE MODAL ===== */
+.status-change-modal {
+  max-width: 500px;
+}
+
+.status-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin: var(--spacing-xl) 0;
+}
+
+.status-option {
+  padding: var(--spacing-lg);
+  background-color: var(--background);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.status-option:hover {
+  border-color: var(--primary);
+  background-color: var(--surface);
+}
+
+.status-option.selected {
+  border-color: var(--primary);
+  background-color: var(--info-bg);
+}
+
+.status-option-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+}
+
+.status-option-icon.pendente {
+  background-color: var(--warning-bg);
+  color: #D97706;
+}
+
+.status-option-icon.confirmado {
+  background-color: var(--success-bg);
+  color: var(--success);
+}
+
+.status-option-icon.cancelado {
+  background-color: var(--error-bg);
+  color: var(--error);
+}
+
+.status-option-content {
+  flex: 1;
+}
+
+.status-option-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.status-option-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* ===== BULK ACTIONS ===== */
+.bulk-actions-bar {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--text-primary);
+  color: white;
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+  z-index: var(--z-sticky);
+  transition: bottom var(--transition-base);
+}
+
+.bulk-actions-bar.show {
+  bottom: var(--spacing-xl);
+}
+
+.bulk-actions-info {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.bulk-actions-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* ===== VIEW TOGGLE ===== */
+.view-toggle {
+  display: flex;
+  background-color: var(--background);
+  border-radius: var(--radius-md);
+  padding: 4px;
+}
+
+.view-toggle-btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+}
+
+.view-toggle-btn.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* ===== CALENDAR VIEW ===== */
+.calendar-view {
+  display: none;
+}
+
+.calendar-view.active {
+  display: block;
+}
+
+.calendar-view-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-sm);
+  background-color: var(--surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+}
+
+.calendar-view-day {
+  min-height: 120px;
+  padding: var(--spacing-sm);
+  background-color: var(--background);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+}
+
+.calendar-view-day-number {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.calendar-view-appointments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.calendar-view-appointment {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs);
+  background-color: var(--primary-light);
+  color: white;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .filters-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .appointment-detail-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .filters-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bulk-actions-bar {
+    width: calc(100% - var(--spacing-xl) * 2);
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .bulk-actions-buttons {
+    flex-direction: column;
+  }
+}

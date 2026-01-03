@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard - Painel Administrativo">
+  <title>Dashboard - Admin</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../public/css/reset.css">
+  <link rel="stylesheet" href="../public/css/variables.css">
+  <link rel="stylesheet" href="../public/css/global.css">
+  <link rel="stylesheet" href="../public/css/components.css">
+  <link rel="stylesheet" href="css/admin-global.css">
+  <link rel="stylesheet" href="css/admin-components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  
+  <div class="admin-layout">
+    
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      
+      <!-- Header -->
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-logo">
+          🩺 Admin
+        </a>
+      </div>
+      
+      <!-- Navigation -->
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="index.html" class="sidebar-link active">
+              <span class="sidebar-link-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="agenda.html" class="sidebar-link">
+              <span class="sidebar-link-icon">📅</span>
+              <span>Agendamentos</span>
+            </a>
+          </li>
+          <li>
+            <a href="horarios.html" class="sidebar-link">
+              <span class="sidebar-link-icon">🕐</span>
+              <span>Gerenciar Horários</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar">D</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name" id="userName">Lucimari Carvalho</span>
+            <span class="sidebar-user-email" id="userEmail">admin@exemplo.com</span>
+          </div>
+        </div>
+        <button class="btn btn-logout btn-sm" id="logoutBtn">
+          Sair
+        </button>
+      </div>
+      
+    </aside>
+    
+    <!-- MAIN CONTENT -->
+    <main class="admin-main" id="adminMain">
+      
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="admin-header-left">
+          <button class="admin-header-toggle" id="sidebarToggle">☰</button>
+          <h1 class="admin-header-title">Dashboard</h1>
+        </div>
+        <div class="admin-header-right">
+          <span id="currentDate"></span>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <div class="admin-content">
+        
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          
+          <div class="stat-card">
+            <div class="stat-icon primary">📅</div>
+            <div class="stat-content">
+              <div class="stat-label">Agendamentos Hoje</div>
+              <div class="stat-value" id="statToday">-</div>
+              <div class="stat-change positive">↑ 2 desde ontem</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon secondary">📊</div>
+            <div class="stat-content">
+              <div class="stat-label">Esta Semana</div>
+              <div class="stat-value" id="statWeek">-</div>
+              <div class="stat-change positive">↑ 15% vs semana passada</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon accent">⏳</div>
+            <div class="stat-content">
+              <div class="stat-label">Pendentes</div>
+              <div class="stat-value" id="statPending">-</div>
+              <div class="stat-change">Aguardando confirmação</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon success">✓</div>
+            <div class="stat-content">
+              <div class="stat-label">Confirmados</div>
+              <div class="stat-value" id="statConfirmed">-</div>
+              <div class="stat-change positive">Taxa de 92%</div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+          
+          <!-- Recent Appointments -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h2 class="admin-card-title">Agendamentos Recentes</h2>
+                <p class="admin-card-subtitle">Últimas solicitações de consulta</p>
+              </div>
+              <div class="admin-card-actions">
+                <a href="agenda.html" class="btn btn-outline btn-sm">Ver Todos</a>
+              </div>
+            </div>
+            <div class="admin-card-body">
+              <div class="recent-appointments-list" id="recentAppointments">
+                <!-- Carregado via JavaScript -->
+                <div class="empty-state">
+                  <div class="empty-state-icon">📅</div>
+                  <h3 class="empty-state-title">Carregando...</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Sidebar -->
+          <div class="dashboard-sidebar">
+            
+            <!-- Quick Actions -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h2 class="admin-card-title">Ações Rápidas</h2>
+              </div>
+              <div class="admin-card-body">
+                <div class="quick-actions-grid">
+                  
+                  <a href="agenda.html" class="quick-action-card">
+                    <div class="quick-action-icon primary">📋</div>
+                    <div class="quick-action-content">
+                      <div class="quick-action-title">Ver Agenda</div>
+                      <div class="quick-action-description">Todos os agendamentos</div>
+                    </div>
+                    <div class="quick-action-arrow">→</div>
+                  </a>
+                  
+                  <a href="horarios.html" class="quick-action-card">
+                    <div class="quick-action-icon secondary">🕐</div>
+                    <div class="quick-action-content">
+                      <div class="quick-action-title">Horários</div>
+                      <div class="quick-action-description">Gerenciar disponibilidade</div>
+                    </div>
+                    <div class="quick-action-arrow">→</div>
+                  </a>
+                  
+                  
+                </div>
+              </div>
+            </div>
+            
+            <!-- Calendar Overview -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h2 class="admin-card-title">Calendário</h2>
+              </div>
+              <div class="admin-card-body">
+                <div class="calendar-overview" id="calendarOverview">
+                  <!-- Carregado via JavaScript -->
+                </div>
+                <div class="stats-summary">
+                  <div class="stats-summary-item">
+                    <div class="stats-summary-value" id="monthTotal">-</div>
+                    <div class="stats-summary-label">Este Mês</div>
+                  </div>
+                  <div class="stats-summary-item">
+                    <div class="stats-summary-value" id="monthConfirmed">-</div>
+                    <div class="stats-summary-label">Confirmados</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+        <!-- Upcoming Sessions -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Próximas Sessões</h2>
+              <p class="admin-card-subtitle">Agendamentos confirmados para hoje e amanhã</p>
+            </div>
+          </div>
+          <div class="admin-card-body">
+            <div class="upcoming-sessions-list" id="upcomingSessions">
+              <!-- Carregado via JavaScript -->
+              <div class="empty-state">
+                <div class="empty-state-icon">📅</div>
+                <h3 class="empty-state-title">Nenhuma sessão próxima</h3>
+                <p class="empty-state-description">Você não tem sessões agendadas para hoje ou amanhã.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </main>
+    
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="js/config/firebase-config.js"></script>
+  
+  <!-- Services -->
+  <script src="js/services/auth-service.js"></script>
+  <script src="js/services/appointment-service.js"></script>
+  
+  <!-- Utils -->
+  <script src="js/utils/auth-guard.js"></script>
+  <script src="../public/js/utils/notifications.js"></script>
+  <script src="../public/js/utils/date-utils.js"></script>
+  
+  <!-- Page Script -->
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

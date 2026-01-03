@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamentos - Admin</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../public/css/reset.css">
+  <link rel="stylesheet" href="../public/css/variables.css">
+  <link rel="stylesheet" href="../public/css/global.css">
+  <link rel="stylesheet" href="../public/css/components.css">
+  <link rel="stylesheet" href="css/admin-global.css">
+  <link rel="stylesheet" href="css/admin-components.css">
+  <link rel="stylesheet" href="css/agenda.css">
+</head>
+<body>
+  
+  <div class="admin-layout">
+    
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-logo">🩺 Admin</a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="index.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard</span></a></li>
+          <li><a href="agenda.html" class="sidebar-link active"><span class="sidebar-link-icon">📅</span><span>Agendamentos</span></a></li>
+          <li><a href="horarios.html" class="sidebar-link"><span class="sidebar-link-icon">🕐</span><span>Gerenciar Horários</span></a></li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar">L</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name" id="userName">Lucimari Carvalho</span>
+            <span class="sidebar-user-email" id="userEmail">admin@exemplo.com</span>
+          </div>
+        </div>
+        <button class="btn btn-logout btn-sm" id="logoutBtn">Sair</button>
+      </div>
+    </aside>
+    
+    <!-- MAIN CONTENT -->
+    <main class="admin-main" id="adminMain">
+      
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="admin-header-left">
+          <button class="admin-header-toggle" id="sidebarToggle">☰</button>
+          <h1 class="admin-header-title">Agendamentos</h1>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <div class="admin-content">
+        
+        <!-- Filters -->
+        <div class="agenda-filters">
+          <div class="filters-row">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input 
+                type="text" 
+                class="form-input" 
+                placeholder="Buscar por nome, CPF ou telefone..."
+                id="searchInput"
+              >
+            </div>
+            
+            <div class="filter-group">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="statusFilter">
+                <option value="">Todos</option>
+                <option value="pendente">Pendente</option>
+                <option value="confirmado">Confirmado</option>
+                <option value="cancelado">Cancelado</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label class="form-label">Data Inicial</label>
+              <input type="date" class="form-input" id="dateStart">
+            </div>
+            
+            <div class="filter-group">
+              <label class="form-label">Data Final</label>
+              <input type="date" class="form-input" id="dateEnd">
+            </div>
+            
+            <button class="btn btn-outline" id="clearFilters" style="align-self: end;">
+              Limpar
+            </button>
+          </div>
+        </div>
+        
+        <!-- Appointments Table -->
+        <div class="appointments-table-wrapper">
+          <div class="table-header">
+            <div>
+              <span class="table-title">Lista de Agendamentos</span>
+              <span class="table-count" id="tableCount">(0)</span>
+            </div>
+            <button class="btn btn-primary btn-sm" id="exportBtn">
+              📥 Exportar
+            </button>
+          </div>
+          
+          <div class="admin-table-container">
+            <table class="admin-table" id="appointmentsTable">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="selectAll"></th>
+                  <th>Paciente</th>
+                  <th>Data</th>
+                  <th>Horário</th>
+                  <th>Contato</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="appointmentsBody">
+                <!-- Carregado via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="pagination" id="pagination">
+            <!-- Carregado via JavaScript -->
+          </div>
+        </div>
+        
+      </div>
+      
+    </main>
+    
+  </div>
+
+  <!-- DETAIL SIDEBAR -->
+  <aside class="appointment-detail-sidebar" id="detailSidebar">
+    <div class="detail-sidebar-header">
+      <h2 class="detail-sidebar-title">Detalhes do Agendamento</h2>
+      <button class="detail-sidebar-close" id="closeSidebar">×</button>
+    </div>
+    
+    <div class="detail-sidebar-content" id="detailContent">
+      <!-- Carregado via JavaScript -->
+    </div>
+  </aside>
+
+  <!-- BULK ACTIONS BAR -->
+  <div class="bulk-actions-bar" id="bulkActionsBar">
+    <div class="bulk-actions-info">
+      <span id="selectedCount">0</span> selecionado(s)
+    </div>
+    <div class="bulk-actions-buttons">
+      <button class="btn btn-sm btn-outline" style="color: white; border-color: white;" id="bulkConfirm">
+        ✓ Confirmar
+      </button>
+      <button class="btn btn-sm btn-outline" style="color: white; border-color: white;" id="bulkCancel">
+        × Cancelar
+      </button>
+      <button class="btn btn-sm btn-ghost" style="color: white;" id="bulkDeselect">
+        Desmarcar todos
+      </button>
+    </div>
+  </div>
+
+  <!-- STATUS CHANGE MODAL -->
+  <div class="modal-overlay hidden" id="statusModal">
+    <div class="modal status-change-modal">
+      <h3>Alterar Status</h3>
+      <p>Escolha o novo status para o agendamento:</p>
+      
+      <div class="status-options" id="statusOptions">
+        <div class="status-option" data-status="pendente">
+          <div class="status-option-icon pendente">⏳</div>
+          <div class="status-option-content">
+            <div class="status-option-title">Pendente</div>
+            <div class="status-option-description">Aguardando confirmação</div>
+          </div>
+        </div>
+        
+        <div class="status-option" data-status="confirmado">
+          <div class="status-option-icon confirmado">✓</div>
+          <div class="status-option-content">
+            <div class="status-option-title">Confirmado</div>
+            <div class="status-option-description">Sessão confirmada</div>
+          </div>
+        </div>
+        
+        <div class="status-option" data-status="cancelado">
+          <div class="status-option-icon cancelado">×</div>
+          <div class="status-option-content">
+            <div class="status-option-title">Cancelado</div>
+            <div class="status-option-description">Agendamento cancelado</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="cancelStatusChange">Cancelar</button>
+        <button class="btn btn-primary" id="confirmStatusChange">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/config/firebase-config.js"></script>
+  <script src="js/services/auth-service.js"></script>
+  <script src="js/services/appointment-service.js"></script>
+  <script src="js/utils/auth-guard.js"></script>
+  <script src="../public/js/utils/notifications.js"></script>
+  <script src="../public/js/utils/date-utils.js"></script>
+  <script src="../public/js/utils/validators.js"></script>
+  <script src="js/agenda.js"></script>
+</body>
+</html>

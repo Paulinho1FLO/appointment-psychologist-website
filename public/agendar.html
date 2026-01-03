@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agende sua consulta de psicologia online de forma rápida e segura.">
+  <title>Agendar Consulta - Dra. [Nome]</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/agendar.css">
+</head>
+<body>
+  
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        
+      </a>
+      
+      <ul class="navbar-menu">
+        <li><a href="index.html" class="navbar-link">← Voltar ao Início</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-agendar">
+    <div class="container">
+      <h1>Agende Sua Primeira Consulta</h1>
+      <p>
+        Escolha o melhor dia e horário para seu atendimento. O processo é simples, 
+        rápido e seguro. Após o agendamento, você receberá todas as informações por WhatsApp.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTAINER PRINCIPAL -->
+  <section class="agendamento-container">
+    <div class="container">
+      <div class="agendamento-wrapper">
+        
+        <!-- SEÇÃO DO CALENDÁRIO -->
+        <div class="calendar-section">
+          <div class="calendar-header">
+            <h2>1. Escolha a Data e Horário</h2>
+            <p>Selecione o dia e horário de sua preferência</p>
+          </div>
+          
+          <!-- Seletor de Fuso Horário -->
+          <div class="timezone-selector">
+            <label for="timezone">
+              🌍 Informe seu fuso horário:
+            </label>
+            <input 
+              type="text" 
+              id="timezone" 
+              name="timezone" 
+              class="form-input"
+              placeholder="Ex: Horário de Brasília"
+              required
+            >
+          </div>
+          
+          <!-- Calendário -->
+          <div class="calendar">
+            <div class="calendar-nav">
+              <button id="prevMonth" type="button">← Anterior</button>
+              <span class="calendar-month" id="currentMonth"></span>
+              <button id="nextMonth" type="button">Próximo →</button>
+            </div>
+            
+            <div class="calendar-grid" id="calendarGrid">
+              <!-- Headers dos dias da semana -->
+              <div class="calendar-day-header">Dom</div>
+              <div class="calendar-day-header">Seg</div>
+              <div class="calendar-day-header">Ter</div>
+              <div class="calendar-day-header">Qua</div>
+              <div class="calendar-day-header">Qui</div>
+              <div class="calendar-day-header">Sex</div>
+              <div class="calendar-day-header">Sáb</div>
+              
+              <!-- Dias serão inseridos aqui via JavaScript -->
+            </div>
+          </div>
+          
+          <!-- Horários Disponíveis -->
+          <div class="time-slots" id="timeSlots">
+            <h3>Horários Disponíveis</h3>
+            <div class="time-slots-empty">
+              Selecione uma data para ver os horários disponíveis
+            </div>
+          </div>
+        </div>
+        
+        <!-- SEÇÃO DO FORMULÁRIO -->
+        <div class="form-section">
+          <div class="form-header">
+            <h2>2. Seus Dados</h2>
+            <p>Preencha suas informações para confirmar o agendamento</p>
+          </div>
+          
+          <!-- Resumo da Seleção -->
+          <div class="selection-summary hidden" id="selectionSummary">
+            <h3>📅 Agendamento Selecionado</h3>
+            <div class="selection-info">
+              <div class="selection-item">
+                <span>📆 <strong>Data:</strong> <span id="selectedDate">-</span></span>
+              </div>
+              <div class="selection-item">
+                <span>🕐 <strong>Horário:</strong> <span id="selectedTime">-</span></span>
+              </div>
+              <div class="selection-item">
+                <span>🌍 <strong>Fuso:</strong> <span id="selectedTimezone">-</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Formulário -->
+          <form class="appointment-form" id="appointmentForm">
+            
+            <!-- Nome Completo -->
+            <div class="form-group">
+              <label for="fullName" class="form-label required">Nome Completo</label>
+              <input 
+                type="text" 
+                id="fullName" 
+                name="fullName" 
+                class="form-input" 
+                placeholder="Seu nome completo"
+                required
+              >
+              <div class="form-feedback is-invalid" style="display: none;">
+                Por favor, informe seu nome completo.
+              </div>
+            </div>
+            
+            <!-- CPF e Data de Nascimento -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cpf" class="form-label required">CPF</label>
+                <input 
+                  type="text" 
+                  id="cpf" 
+                  name="cpf" 
+                  class="form-input" 
+                  placeholder="000.000.000-00"
+                  maxlength="14"
+                  required
+                >
+              </div>
+              
+              <div class="form-group">
+                <label for="birthdate" class="form-label required">Data de Nascimento</label>
+                <input 
+                  type="date" 
+                  id="birthdate" 
+                  name="birthdate" 
+                  class="form-input"
+                  required
+                >
+              </div>
+            </div>
+            
+            <!-- Validação de Idade -->
+            <div class="age-validation hidden" id="ageValidation">
+              <p>⚠️ Este serviço é destinado apenas para maiores de 18 anos.</p>
+            </div>
+            
+            <!-- WhatsApp e Endereço -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="whatsapp" class="form-label required">WhatsApp</label>
+                <input 
+                  type="tel" 
+                  id="whatsapp" 
+                  name="whatsapp" 
+                  class="form-input" 
+                  placeholder="(00) 00000-0000"
+                  maxlength="15"
+                  required
+                >
+              </div>
+              
+              <div class="form-group">
+                <label for="address" class="form-label required">Cidade/Estado</label>
+                <input 
+                  type="text" 
+                  id="address" 
+                  name="address" 
+                  class="form-input" 
+                  placeholder="Ex: São Paulo/SP"
+                  required
+                >
+              </div>
+            </div>
+            
+            <!-- Primeira vez em terapia -->
+            <div class="form-group">
+              <label for="firstTime" class="form-label required">Primeira vez em terapia?</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input 
+                    type="radio" 
+                    id="firstTimeYes" 
+                    name="firstTime" 
+                    value="sim"
+                    required
+                  >
+                  <span>Sim</span>
+                </label>
+                <label class="radio-label">
+                  <input 
+                    type="radio" 
+                    id="firstTimeNo" 
+                    name="firstTime" 
+                    value="não"
+                    required
+                  >
+                  <span>Não</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Motivo do atendimento -->
+            <div class="form-group">
+              <label for="reason" class="form-label required">Motivo do atendimento</label>
+              <textarea 
+                id="reason" 
+                name="reason" 
+                class="form-textarea" 
+                placeholder="Conte um pouco sobre o que te traz aqui..."
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            
+            <!-- Observações (Opcional) -->
+            <div class="form-group">
+              <label for="notes" class="form-label">Observações (Opcional)</label>
+              <textarea 
+                id="notes" 
+                name="notes" 
+                class="form-textarea" 
+                placeholder="Alguma informação adicional que gostaria de compartilhar?"
+                rows="4"
+              ></textarea>
+            </div>
+            
+            <!-- Termos de Consentimento -->
+            <div class="terms-section">
+              <div class="terms-content">
+                <h4>Contrato – Consultas Psicológicas</h4>
+                
+                <p>Organize-se para comparecer pontualmente na data e no horário previamente acordados. Não são enviadas mensagens semanais de confirmação; estarei sempre disponível no dia e horário estabelecidos. As sessões têm duração média de 50 minutos, podendo se estender ou encerrar alguns minutos antes, conforme o andamento clínico da sessão.</p>
+
+                <p>O valor da sessão deve ser pago em até 1 (uma) hora antes do atendimento, via PIX – chave: 48 99968-3301 e enviado comprovante no WhatsApp.</p>
+
+                <p>As sessões não poderão ser realizadas em ambientes não privados, como locais públicos, veículos ou espaços compartilhados. Durante o atendimento, é necessário estar isolada de contato com outras pessoas, garantindo sigilo e privacidade. Utilize sempre equipamento próprio, mantendo-se em local seguro, silencioso e adequado para a realização da sessão. É obrigatório o uso de fone de ouvido, visando melhor qualidade de áudio e preservação da confidencialidade. Caso o atendimento seja realizado por celular, organize-se para mantê-lo apoiado em local fixo.</p>
+
+                <p>As sessões não poderão ser gravadas, seja por meio de imagem, áudio, texto ou qualquer outro recurso, criptografado ou não. Os atendimentos ocorrerão de forma síncrona, por meio do Google Meet, sempre utilizando o mesmo link, no dia e horário previamente estabelecidos.</p>
+
+                <p>Cancelamentos ou reagendamentos poderão ser realizados com, no mínimo, 24 horas de antecedência. Após este período a sessão é anotada como realizada.</p>
+
+                <p>Recomenda-se a utilização de programa antivírus atualizado e a verificação prévia do funcionamento do equipamento e da conexão com a internet antes do início da sessão.</p>
+
+                <p>Quando desejar encerrar o processo terapêutico, recomenda-se a realização de uma sessão de fechamento, com o objetivo de concluir e integrar o percurso terapêutico realizado até o momento.</p>
+
+                <p><strong>Sigilo e Confidencialidade</strong></p>
+                <p>O atendimento psicológico é regido pelos princípios do Código de Ética Profissional do Psicólogo, assegurando respeito, dignidade, autonomia e confidencialidade das informações compartilhadas durante o processo terapêutico. Todas as informações obtidas são protegidas por sigilo profissional, sendo utilizadas exclusivamente para fins terapêuticos, podendo este ser quebrado apenas nos casos previstos em lei ou diante de risco iminente à vida da paciente ou de terceiros, conforme legislação vigente e normativas do Conselho Federal de Psicologia.</p>
+
+                <p><strong>Lei Geral de Proteção de Dados - LGPD</strong></p>
+                <p>Em conformidade com a Lei Geral de Proteção de Dados Pessoais – LGPD (Lei nº 13.709/2018), os dados pessoais e sensíveis fornecidos, inclusive informações de saúde, serão coletados, armazenados e tratados de forma segura, ética e restrita, exclusivamente para fins relacionados à prestação do serviço psicológico.</p>
+
+                <p>Os dados poderão ser armazenados em meios físicos ou digitais, com acesso limitado à profissional responsável, adotando-se medidas técnicas e administrativas adequadas para proteção contra acessos não autorizados, perdas, vazamentos ou usos indevidos.</p>
+
+                <p>Não haverá compartilhamento de dados com terceiros sem consentimento expresso, exceto nos casos legalmente previstos. A paciente poderá solicitar informações sobre o tratamento de seus dados, bem como correção, atualização ou eliminação, respeitados os prazos legais e as obrigações éticas da profissão.</p>
+
+                <p style="margin-top: 20px; font-style: italic;">Da minha parte, estarei cuidando de todos os aspectos necessários para estar com você de forma ética, responsável e presente em cada sessão.</p>
+              </div>
+              
+              <div class="form-check">
+                <input 
+                  type="checkbox" 
+                  id="termsAccepted" 
+                  name="termsAccepted" 
+                  class="form-check-input"
+                  required
+                >
+                <label for="termsAccepted" class="form-check-label">
+                  Li e concordo com os termos do contrato de consultas psicológicas e autorizo o armazenamento dos meus dados conforme a LGPD.
+                </label>
+              </div>
+            </div>
+            
+            <!-- Botão de Envio -->
+            <div class="submit-section">
+              <button type="submit" class="btn btn-primary btn-submit" id="submitBtn" disabled>
+                <span class="spinner"></span>
+                <span>Confirmar Agendamento</span>
+              </button>
+              <p style="text-align: center; margin-top: var(--spacing-md); font-size: var(--font-size-sm); color: var(--text-secondary);">
+                Após confirmar, você receberá uma mensagem no WhatsApp com o link da sessão e dados de pagamento.
+              </p>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL DE CONFIRMAÇÃO -->
+  <div class="modal-overlay hidden" id="confirmationModal">
+    <div class="modal confirmation-modal">
+      <div class="confirmation-icon">✓</div>
+      <h3>Agendamento Confirmado!</h3>
+      <p>
+        Sua consulta foi agendada com sucesso. Em breve você receberá uma mensagem 
+        no WhatsApp com o link da sessão online e os dados para pagamento.
+      </p>
+      
+      <div class="confirmation-details">
+        <p>
+          <span>Nome:</span>
+          <strong id="confirmName">-</strong>
+        </p>
+        <p>
+          <span>Data:</span>
+          <strong id="confirmDate">-</strong>
+        </p>
+        <p>
+          <span>Horário:</span>
+          <strong id="confirmTime">-</strong>
+        </p>
+        <p>
+          <span>WhatsApp:</span>
+          <strong id="confirmWhatsapp">-</strong>
+        </p>
+      </div>
+      
+      <div class="modal-actions">
+        <a href="index.html" class="btn btn-outline">Voltar ao Início</a>
+        <button class="btn btn-primary" onclick="location.reload()">Novo Agendamento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SIMPLIFICADO -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Lucimari Carvalho. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase SDK (será configurado depois) -->
+  <script src="js/config/firebase-config.js"></script>
+  
+  <!-- Services -->
+  <script src="js/services/availability-service.js"></script>
+  <script src="js/services/appointment-service.js"></script>
+  
+  <!-- Utils -->
+  <script src="js/utils/date-utils.js"></script>
+  <script src="js/utils/validators.js"></script>
+  <script src="js/utils/notifications.js"></script>
+  
+  <!-- Page Script -->
+  <script src="js/agendar.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Horários - Admin</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../public/css/reset.css">
+  <link rel="stylesheet" href="../public/css/variables.css">
+  <link rel="stylesheet" href="../public/css/global.css">
+  <link rel="stylesheet" href="../public/css/components.css">
+  <link rel="stylesheet" href="css/admin-global.css">
+  <link rel="stylesheet" href="css/admin-components.css">
+  <link rel="stylesheet" href="css/horarios.css">
+</head>
+<body>
+  
+  <div class="admin-layout">
+    
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-logo">🩺 Admin</a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="index.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span>Dashboard</span></a></li>
+          <li><a href="agenda.html" class="sidebar-link"><span class="sidebar-link-icon">📅</span><span>Agendamentos</span></a></li>
+          <li><a href="horarios.html" class="sidebar-link active"><span class="sidebar-link-icon">🕐</span><span>Gerenciar Horários</span></a></li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar">D</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name" id="userName">Lucimari Carvalho</span>
+            <span class="sidebar-user-email" id="userEmail">admin@exemplo.com</span>
+          </div>
+        </div>
+        <button class="btn btn-logout btn-sm" id="logoutBtn">Sair</button>
+      </div>
+    </aside>
+    
+    <!-- MAIN CONTENT -->
+    <main class="admin-main" id="adminMain">
+      
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="admin-header-left">
+          <button class="admin-header-toggle" id="sidebarToggle">☰</button>
+          <h1 class="admin-header-title">Gerenciar Horários</h1>
+        </div>
+      </header>
+      
+      <!-- Content -->
+      <div class="admin-content">
+        
+        <!-- Instruction -->
+        <div class="admin-card" style="margin-bottom: var(--spacing-xl); background: linear-gradient(135deg, var(--info-bg), var(--success-bg));">
+          <div class="admin-card-body">
+            <p style="margin: 0; font-size: var(--font-size-base); color: var(--text-primary);">
+              💡 <strong>Como funciona:</strong> Clique em um dia da semana para ver e gerenciar os horários daquele dia. 
+              Você pode adicionar ou remover horários individualmente.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Weekday Selector -->
+        <div class="weekday-selector" id="weekdaySelector">
+          <button class="weekday-btn" data-day="0">
+            <span class="weekday-name">DOM</span>
+            <span class="weekday-count">0 horários</span>
+          </button>
+          <button class="weekday-btn" data-day="1">
+            <span class="weekday-name">SEG</span>
+            <span class="weekday-count">0 horários</span>
+          </button>
+          <button class="weekday-btn" data-day="2">
+            <span class="weekday-name">TER</span>
+            <span class="weekday-count">0 horários</span>
+          </button>
+          <button class="weekday-btn" data-day="3">
+            <span class="weekday-name">QUA</span>
+            <span class="weekday-count">0 horários</span>
+          </button>
+          <button class="weekday-btn" data-day="4">
+            <span class="weekday-name">QUI</span>
+            <span class="weekday-count">0 horários</span>
+          </button>
+          <button class="weekday-btn" data-day="5">
+            <span class="weekday-name">SEX</span>
+            <span class="weekday-count">0 horários</span>
+          </button>
+          <button class="weekday-btn" data-day="6">
+            <span class="weekday-name">SÁB</span>
+            <span class="weekday-count">0 horários</span>
+          </button>
+        </div>
+        
+        <!-- Schedule Section -->
+        <div class="schedule-section">
+          <div class="schedule-header">
+            <div>
+              <h2 class="schedule-title" id="scheduleTitle">Selecione um dia</h2>
+              <p class="schedule-subtitle" id="scheduleSubtitle">Clique em um dia acima para começar</p>
+            </div>
+          </div>
+          
+          <div id="scheduleContent">
+            <div class="schedule-empty">
+              <div class="schedule-empty-icon">📅</div>
+              <h3 class="schedule-empty-title">Nenhum dia selecionado</h3>
+              <p class="schedule-empty-description">Clique em um dos dias acima para gerenciar os horários</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Block Dates Section -->
+        <div class="block-dates-section">
+          <div class="schedule-header">
+            <div>
+              <h2 class="schedule-title">🚫 Bloquear Datas Específicas</h2>
+              <p class="schedule-subtitle">Férias, feriados ou compromissos</p>
+            </div>
+          </div>
+          
+          <div class="add-time-form">
+            <div class="add-time-fields">
+              <div class="form-group">
+                <label class="form-label">Data</label>
+                <input type="date" class="form-input" id="blockDate">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Motivo (opcional)</label>
+                <input type="text" class="form-input" id="blockReason" placeholder="Ex: Férias, Feriado...">
+              </div>
+              <button class="btn btn-primary" id="addBlockDate">
+                🚫 Bloquear
+              </button>
+            </div>
+          </div>
+          
+          <div class="blocked-dates-list" id="blockedDatesList">
+            <div class="schedule-empty">
+              <div class="schedule-empty-icon">📅</div>
+              <h3 class="schedule-empty-title">Nenhuma data bloqueada</h3>
+              <p class="schedule-empty-description">As datas bloqueadas aparecerão aqui</p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </main>
+    
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/config/firebase-config.js"></script>
+  <script src="js/services/auth-service.js"></script>
+  <script src="js/utils/auth-guard.js"></script>
+  <script src="../public/js/utils/notifications.js"></script>
+  <script src="../public/js/utils/date-utils.js"></script>
+  <script src="js/horarios.js"></script>
+</body>
+</html>
